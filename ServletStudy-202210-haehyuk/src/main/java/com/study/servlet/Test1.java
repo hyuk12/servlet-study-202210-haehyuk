@@ -16,20 +16,33 @@ import javax.servlet.http.HttpServletResponse;
 public class Test1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
-	 */
+	@Override
+	public void init() throws ServletException {
+		System.out.println("Test1.class init 메서드 호출!");
+		
+	}
+	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("HttpServletRequest.request" + request);
 		System.out.println("HttpServletRequest.response" + response);
+		request.setCharacterEncoding("utf-8");
+		System.out.println(request.getParameter("name"));
+		System.out.println(request.getParameter("age"));
 		response.setContentType("text/html");
 		response.setCharacterEncoding("utf-8");
+		
 		
 		PrintWriter out = response.getWriter();
 		
 		out.print("<html><head><title>테스트1</title></head><body>");
 		out.print("<h1>테스트 1 서블릿 호출</h1>");
 		out.print("</body></html>");
+		
+	}
+	
+	@Override
+	public void destroy() {
+		System.out.println("Test1.class destroy 메서드 호출");
 		
 	}
 
