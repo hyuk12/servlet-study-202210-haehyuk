@@ -24,6 +24,7 @@ public class RegisterApi extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String> registerParams = DTO.getParams(request);
 		AccountService accountService = AccountService.getInstance();
+		
 		if(accountService.isDuplicateUsername(registerParams.get("username"))) {
 			System.out.println("아이디가 중복되었습니다.");
 			request.getRequestDispatcher("/WEB-INF/account/error_username.html").forward(request, response);
@@ -36,6 +37,7 @@ public class RegisterApi extends HttpServlet {
 				.password(registerParams.get("password"))
 				.name(registerParams.get("name"))
 				.email(registerParams.get("email"))
+				.roles("ROLE_USER, ROLE_ADMIN")
 				.build();
 				
 		accountService.register(user);

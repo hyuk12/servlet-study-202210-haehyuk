@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.study.domain.User;
 import com.study.service.AccountService;
@@ -37,6 +38,10 @@ public class LoginApi extends HttpServlet {
 			return;
 		}
 		// 로그인 성공!
+		HttpSession session =  request.getSession();
+		session.setAttribute("principal", user);
+		
+		response.sendRedirect("/mypage");
 
 	}
 
