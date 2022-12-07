@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import com.study.util.DTO;
 
 
@@ -39,7 +40,7 @@ public class Ajax3Api extends HttpServlet {
 //			}
 //		});
 		
-		response.setContentType("text/plain; charset=utf-8");
+		response.setContentType("application/json; charset=utf-8");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		
@@ -52,7 +53,10 @@ public class Ajax3Api extends HttpServlet {
 			sb.append("-");
 		});
 		sb.delete(sb.length() - 1, sb.length());
-		out.print(sb.toString());
+		JsonObject jsonObject = new JsonObject();
+		jsonObject.addProperty("responseData", sb.toString());
+		
+		out.print(jsonObject.toString());
 	}
 
 }

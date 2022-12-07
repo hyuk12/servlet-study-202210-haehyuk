@@ -30,9 +30,9 @@
 				data: {
 					jsonData: JSON.stringify(phoneNumber)
 				},
-				dataType: "text",
+				dataType: "json",
 				success: response => {
-					alert(response);
+					console.log(response);
 				},
 				error: response => {
 					alert("요청 실패!!");
